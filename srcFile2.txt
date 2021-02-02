@@ -1,20 +1,39 @@
-66
-
-Sahih akbar          & 12.11^
-akbar Jam 2 &
-		&  22^
-ta(i & 2)
-swww 55
-22
-
-
-0
-988
-8
-
-
-aaa
-a a
-a2 111111111111.1
-0.88 ali
-//salam chetori
+Sahih R & 333^
+Sahih X & 234^
+Sahih S^
+Ashari koj & 21.55^
+Harf ch & s^
+agar{R &B X}
+[
+X&R^
+]
+agar{R &BM X}
+[
+X&R^
+]
+agar{R &K X}
+[
+X&R^
+]
+agar{R &KM X}
+[
+X&R^
+]
+agar{R &MM X}
+[
+X&R^
+]
+RYekiBala^
+RYekiPain^
+S & R Jam X^
+S & R Bagimonde X^
+S & R Kam X^
+S & R Tagsim X^
+S & R Zarb X^
+ta{R &K X}
+[
+RYekiBala^
+]
+Benevis("Salam")^
+Sahih z^
+Begir("%d",z)^

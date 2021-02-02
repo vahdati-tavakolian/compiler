@@ -7,8 +7,8 @@
 
 //DEFINE our source program's keywords , identifier , numbers --- We can also use regular expression for this part
 char keyword[30][30] = {"Benevis" , "Begir" , "agar" , "ta" , "Sahih" , "Ashari" , "Harf"};
-char logop[30][30] = {"&B" , "&BM" , "&K" , "&KM" , "&MM" , "&"}; //logical operation like > , >= , < , <= , == , = in c
-char mathop[30][30] = {"Jam" , "YekiBala" , "Kam" , "YekiPain" , "Zarb" , "Tagsim" , "Bagimonde"}; //Mathematical Operators like + , ++ , - , -- , * , / , % in c
+char logop[30][30] = {"&B" , "&BM" , "&K" , "&KM" , "&MM"}; //logical operation like > , >= , < , <= , == in c
+char mathop[30][30] = {"Jam" , "Kam" , "Zarb" , "Tagsim" , "Bagimonde"}; //Mathematical Operators like + , -  , * , / , % in c
 char id[20] , num[10];
 
 
@@ -169,7 +169,7 @@ void recognitionToken(FILE *srcFile2, FILE *tokens)
 	{
 		switch(state)
 		{
-			case 0: if(isalpha(c) || c == '_'){
+			case 0: if(isalpha(c) || c == '_' || c == '&'){
 							state=1;
 							id[i++] = c;
 					}
@@ -185,10 +185,29 @@ void recognitionToken(FILE *srcFile2, FILE *tokens)
 									else
 									{
 										//fprintf(tokens,"\n%c",c);
-										if(c == '&')
-											fprintf(tokens , "Equal Operation : %c\n",c);
-										else if(c == '^')
-											fprintf(tokens , "SemiColon : %c\n",c);
+										if(c == '^')
+										{
+											fprintf(tokens , "semicolon : %c\n",c);
+											fprintf(tokens , "$");
+										}
+										else if(c == '(')
+											fprintf(tokens , "ParantezBaz : %c\n",c);
+										else if(c == ')')
+											fprintf(tokens , "ParantezBaste : %c\n",c);
+										else if(c == '[')
+											fprintf(tokens , "BelakBaz : %c\n",c);
+										else if(c == ']')
+											fprintf(tokens , "BelakBaste : %c\n",c);
+										else if(c == ']')
+											fprintf(tokens , "BelakBaste : %c\n",c);
+										else if(c == ']')
+											fprintf(tokens , "BelakBaste : %c\n",c);
+										else if(c == '{')
+											fprintf(tokens , "AkoladBaz : %c\n",c);
+										else if(c == '}')
+											fprintf(tokens , "AkoladBaste : %c\n",c);
+										else if(c == ',')
+											fprintf(tokens , ", : %c\n",c);
 									}
 					break;
 					
@@ -203,11 +222,17 @@ void recognitionToken(FILE *srcFile2, FILE *tokens)
 						if(check_keyword(id))
 							fprintf(tokens, "Keyword : %s\n",id);
 						else if(check_logop(id))
-							fprintf(tokens, "Logical Operation : %s\n",id);
+							fprintf(tokens, "logop : %s\n",id);
+						else if(strcmp(id,"YekiBala") == 0 )
+							fprintf(tokens , "++ : %s\n",id);
+						else if(strcmp(id,"YekiPain") == 0)
+							fprintf(tokens , "-- : %s\n",id);
 						else if(check_mathop(id))
-							fprintf(tokens, "Mathematical Operation : %s\n",id);
+							fprintf(tokens, "mathop : %s\n",id);
+						else if(id[i-1] == '&')
+							fprintf(tokens , "EqualOperation : %s\n",id);
 						else
-							fprintf(tokens, "Identifier : %s\n",id);
+							fprintf(tokens, "id : %s\n",id);
 						
 						state=0;
 						i=0;
@@ -225,7 +250,7 @@ void recognitionToken(FILE *srcFile2, FILE *tokens)
 						else
 						{
 							num[j] = '\0';
-							fprintf(tokens,"number : %s\n",num);
+							fprintf(tokens,"num : %s\n",num);
 							state=0 ; 
 							j=0;
 							ungetc(c,srcFile2);	
@@ -283,7 +308,7 @@ int check_mathop(char s[])
 
 int check_logop(char s[])
 {
-	for (int i=0 ; i <6; i++)
+	for (int i=0 ; i <5; i++)
 	{
 		if(strcmp(s,logop[i]) == 0)   //strcmp is a function from <string.h> library for comparisson two const char *
 			return 1;
